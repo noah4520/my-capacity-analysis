@@ -1,7 +1,7 @@
 "use client"
 import { LabelList, Pie, PieChart } from "recharts"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card"
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../../components/ui/chart"
 
 interface StatisticsChartProps {
   stats: {
@@ -44,12 +44,12 @@ const chartConfig = {
 
 export function StatisticsChart({ stats }: StatisticsChartProps) {
   const chartData = [
-    { name: "analyze", value: stats.totalNotes, fill: chartConfig.analyze.color },
-    { name: "projectRequirements", value: stats.totalProjectRequirements, fill: chartConfig.projectRequirements.color },
-    { name: "maintenance", value: stats.totalMaintenance, fill: chartConfig.maintenance.color },
-    { name: "meetings", value: stats.totalMeetings, fill: chartConfig.meetings.color },
-    { name: "leaves", value: stats.totalLeaves, fill: chartConfig.leaves.color },
-    { name: "other", value: stats.totalOldRequirementAdjustments, fill: chartConfig.other.color },
+    { name: "分析", value: stats.totalNotes, fill: chartConfig.analyze.color },
+    { name: "專案需求", value: stats.totalProjectRequirements, fill: chartConfig.projectRequirements.color },
+    { name: "維運", value: stats.totalMaintenance, fill: chartConfig.maintenance.color },
+    { name: "會議", value: stats.totalMeetings, fill: chartConfig.meetings.color },
+    { name: "請假", value: stats.totalLeaves, fill: chartConfig.leaves.color },
+    { name: "其他", value: stats.totalOldRequirementAdjustments, fill: chartConfig.other.color },
   ].filter(item => item.value > 0) // 過濾掉數值為 0 的項目
 
   return (
@@ -61,7 +61,7 @@ export function StatisticsChart({ stats }: StatisticsChartProps) {
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px] [&_.recharts-text]:fill-background"
+          className="mx-auto aspect-square max-h-[500px] [&_.recharts-text]:fill-background"
         >
           <PieChart>
             <ChartTooltip
@@ -77,8 +77,8 @@ export function StatisticsChart({ stats }: StatisticsChartProps) {
                 className="fill-background"
                 stroke="none"
                 fontSize={12}
-                formatter={(value: keyof typeof chartConfig) => 
-                  `${chartConfig[value].label} (${chartData.find(d => d.name === value)?.value.toFixed(1)}h)`
+                formatter={(value: string) => 
+                  `${chartConfig[value as keyof typeof chartConfig]?.label || value} (${chartData.find(d => d.name === value)?.value}h)`
                 }
               />
             </Pie>
