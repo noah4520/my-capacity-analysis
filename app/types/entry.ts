@@ -41,3 +41,45 @@ export type TimeEntryWithDate = TimeEntry & {
    */
   id: number;
 }
+
+export type StatisticsProp = {
+  /**
+   * 總分析時間
+   */
+  totalAnalyze: number;
+
+  /**
+   * 總專案需求時間
+   */
+  totalProjectRequirements: number;
+
+  /**
+   * 總維運時間
+   */
+  totalMaintenance: number;
+
+  /**
+   * 總會議時間
+   */
+  totalMeetings: number;
+
+  /**
+   * 總請假時間
+   */
+  totalLeaves: number;
+
+  /**
+   * 總其他時間
+   */
+  totalOther: number;
+
+  /**
+   * 總工時
+   */
+  grandTotal: number;
+
+  /**
+   * 唯一日期
+   */
+  uniqueDates: Set<string>;
+}

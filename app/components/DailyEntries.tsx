@@ -1,5 +1,5 @@
 
-import { Button } from '@/components/ui/button';
+import { Button } from '../../components/ui/button';
 import { Trash2 } from 'lucide-react';
 import { TimeEntryWithDate } from '../types/entry';
 
@@ -27,7 +27,7 @@ export const DailyEntries = ({ entries, onDeleteEntry, dailyTotal }: DailyEntrie
             <p>維運: {entry.maintenance || 0} 小時</p>
             <p>會議: {entry.meetings || 0} 小時</p>
             <p>請假: {entry.leaves || 0} 小時</p>
-            <p>舊需求調整: {entry.other || 0} 小時</p>
+            <p>其他: {entry.other || 0} 小時</p>
           </div>
           <Button 
             variant="destructive" 

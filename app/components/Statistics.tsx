@@ -1,21 +1,10 @@
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
 import { BarChart2 } from 'lucide-react';
+import { StatisticsProp } from '../types/entry';
 
-interface StatisticsProps {
-  stats: {
-    totalNotes: number;
-    totalProjectRequirements: number;
-    totalMaintenance: number;
-    totalOldRequirementAdjustments: number;
-    totalMeetings: number;
-    totalLeaves: number;
-    grandTotal: number;
-    uniqueDates: Set<string>;
-  };
-}
-
-export const Statistics = ({ stats }: StatisticsProps) => {
+export const Statistics = ({ stats }: {stats: StatisticsProp}) => {
+  console.log('stats', stats);
   return (
     <Card>
       <CardHeader>
@@ -33,11 +22,11 @@ export const Statistics = ({ stats }: StatisticsProps) => {
           <div className="grid grid-cols-3 border-b">
             <div className="p-2 border-r">分析</div>
             <div className="p-2 text-right border-r">
-              {stats.totalNotes.toFixed(1)}
+              {stats.totalAnalyze.toFixed(1)}
             </div>
             <div className="p-2 text-right">
               {stats.grandTotal > 0 
-                ? ((stats.totalNotes / stats.grandTotal) * 100).toFixed(1) + '%'
+                ? ((stats.totalAnalyze / stats.grandTotal) * 100).toFixed(1) + '%'
                 : '0%'}
             </div>
           </div>
@@ -64,17 +53,6 @@ export const Statistics = ({ stats }: StatisticsProps) => {
             </div>
           </div>
           <div className="grid grid-cols-3 border-b">
-            <div className="p-2 border-r">舊需求調整</div>
-            <div className="p-2 text-right border-r">
-              {stats.totalOldRequirementAdjustments.toFixed(1)}
-            </div>
-            <div className="p-2 text-right">
-              {stats.grandTotal > 0 
-                ? ((stats.totalOldRequirementAdjustments / stats.grandTotal) * 100).toFixed(1) + '%'
-                : '0%'}
-            </div>
-          </div>
-          <div className="grid grid-cols-3 border-b">
             <div className="p-2 border-r">會議</div>
             <div className="p-2 text-right border-r">
               {stats.totalMeetings.toFixed(1)}
@@ -93,6 +71,17 @@ export const Statistics = ({ stats }: StatisticsProps) => {
             <div className="p-2 text-right">
               {stats.grandTotal > 0 
                 ? ((stats.totalLeaves / stats.grandTotal) * 100).toFixed(1) + '%'
+                : '0%'}
+            </div>
+          </div>
+          <div className="grid grid-cols-3 border-b">
+            <div className="p-2 border-r">其他</div>
+            <div className="p-2 text-right border-r">
+              {stats.totalOther.toFixed(1)}
+            </div>
+            <div className="p-2 text-right">
+              {stats.grandTotal > 0 
+                ? ((stats.totalOther / stats.grandTotal) * 100).toFixed(1) + '%'
                 : '0%'}
             </div>
           </div>

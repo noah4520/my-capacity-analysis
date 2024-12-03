@@ -1,6 +1,6 @@
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Calendar } from '@/components/ui/calendar';
+import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
+import { Calendar } from '../../components/ui/calendar';
 
 interface DateSelectorProps {
   selectedDate: Date;

@@ -2,18 +2,7 @@
 import { LabelList, Pie, PieChart } from "recharts"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../../components/ui/chart"
-
-interface StatisticsChartProps {
-  stats: {
-    totalNotes: number;
-    totalProjectRequirements: number;
-    totalMaintenance: number;
-    totalMeetings: number;
-    totalLeaves: number;
-    totalOldRequirementAdjustments: number;
-    grandTotal: number;
-  }
-}
+import { StatisticsProp } from "../types/entry"
 
 const chartConfig = {
   analyze: {
@@ -42,14 +31,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function StatisticsChart({ stats }: StatisticsChartProps) {
+export function StatisticsChart({ stats }: {stats: StatisticsProp}) {
   const chartData = [
-    { name: "分析", value: stats.totalNotes, fill: chartConfig.analyze.color },
+    { name: "分析", value: stats.totalAnalyze, fill: chartConfig.analyze.color },
     { name: "專案需求", value: stats.totalProjectRequirements, fill: chartConfig.projectRequirements.color },
     { name: "維運", value: stats.totalMaintenance, fill: chartConfig.maintenance.color },
     { name: "會議", value: stats.totalMeetings, fill: chartConfig.meetings.color },
     { name: "請假", value: stats.totalLeaves, fill: chartConfig.leaves.color },
-    { name: "其他", value: stats.totalOldRequirementAdjustments, fill: chartConfig.other.color },
+    { name: "其他", value: stats.totalOther, fill: chartConfig.other.color },
   ].filter(item => item.value > 0) // 過濾掉數值為 0 的項目
 
   return (

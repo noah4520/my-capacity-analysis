@@ -1,13 +1,13 @@
 "use client"
 
 import { useState, useMemo } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { DateSelector } from '@/app/components/DateSelector';
-import { TimeEntryForm } from '@/app/components/TimeEntryForm';
-import { DailyEntries } from '@/app/components/DailyEntries';
-import { Statistics } from '@/app/components/Statistics';
-import { StatisticsChart } from '@/app/components/StatisticsChart';
-import { TimeEntry, TimeEntryWithDate } from './types/entry';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
+import { DateSelector } from '../app/components/DateSelector';
+import { TimeEntryForm } from '../app/components/TimeEntryForm';
+import { DailyEntries } from '../app/components/DailyEntries';
+import { Statistics } from '../app/components/Statistics';
+import { StatisticsChart } from '../app/components/StatisticsChart';
+import { TimeEntry, TimeEntryWithDate, StatisticsProp } from './types/entry';
 
 const TimeAllocationTracker = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -67,34 +67,35 @@ const TimeAllocationTracker = () => {
   };
 
   const calculateOverallStatistics = useMemo(() => {
-    const stats = {
-      totalNotes: 0,
+    const stats:StatisticsProp = {
+      totalAnalyze: 0,
       totalProjectRequirements: 0,
       totalMaintenance: 0,
-      totalOldRequirementAdjustments: 0,
       totalMeetings: 0,
       totalLeaves: 0,
+      totalOther: 0,
       grandTotal: 0,
       uniqueDates: new Set<string>(),
     };
 
     timeEntries.forEach(entry => {
-      stats.totalNotes += parseFloat(entry.analyze) || 0;
+      stats.totalAnalyze += parseFloat(entry.analyze) || 0;
       stats.totalProjectRequirements += parseFloat(entry.projectRequirements) || 0;
       stats.totalMaintenance += parseFloat(entry.maintenance) || 0;
       stats.totalMeetings += parseFloat(entry.meetings) || 0;
       stats.totalLeaves += parseFloat(entry.leaves) || 0;
-      stats.totalOldRequirementAdjustments += parseFloat(entry.other) || 0;
+      stats.totalOther += parseFloat(entry.other) || 0;
+      stats.grandTotal += parseFloat(entry.other) || 0;
       stats.uniqueDates.add(formatDate(entry.date));
     });
 
     stats.grandTotal = 
-      stats.totalNotes +
+      stats.totalAnalyze +
       stats.totalProjectRequirements +
       stats.totalMaintenance +
-      stats.totalOldRequirementAdjustments +
       stats.totalMeetings +
-      stats.totalLeaves;
+      stats.totalLeaves+
+      stats.totalOther;
 
     return stats;
   }, [timeEntries]);

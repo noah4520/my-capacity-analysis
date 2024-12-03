@@ -1,6 +1,6 @@
 
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Button } from '../../components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { TimeEntry } from '../types/entry';
 
@@ -15,8 +15,9 @@ export const TimeEntryForm = ({ newEntry, onInputChange, onAddEntry }: TimeEntry
     <div>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label>分析 (小時)</label>
+          <label htmlFor='analyze'>分析 (小時)</label>
           <Input 
+            id="analyze"
             type="number" 
             value={newEntry.analyze}
             onChange={(e) => onInputChange('analyze', e.target.value)}
@@ -24,8 +25,9 @@ export const TimeEntryForm = ({ newEntry, onInputChange, onAddEntry }: TimeEntry
           />
         </div>
         <div>
-          <label>專案需求 (小時)</label>
+          <label htmlFor='projectRequirements'>專案需求 (小時)</label>
           <Input 
+            id="projectRequirements"
             type="number" 
             value={newEntry.projectRequirements}
             onChange={(e) => onInputChange('projectRequirements', e.target.value)}
@@ -33,8 +35,9 @@ export const TimeEntryForm = ({ newEntry, onInputChange, onAddEntry }: TimeEntry
           />
         </div>
         <div>
-          <label>維運 (小時)</label>
+          <label htmlFor='maintenance'>維運 (小時)</label>
           <Input 
+            id='maintenance'
             type="number" 
             value={newEntry.maintenance}
             onChange={(e) => onInputChange('maintenance', e.target.value)}
@@ -42,8 +45,9 @@ export const TimeEntryForm = ({ newEntry, onInputChange, onAddEntry }: TimeEntry
           />
         </div>
         <div>
-          <label>會議 (小時)</label>
+          <label htmlFor='meetings'>會議 (小時)</label>
           <Input 
+            id='meetings'
             type="number" 
             value={newEntry.meetings}
             onChange={(e) => onInputChange('meetings', e.target.value)}
@@ -51,8 +55,9 @@ export const TimeEntryForm = ({ newEntry, onInputChange, onAddEntry }: TimeEntry
           />
         </div>
         <div>
-          <label>請假 (小時)</label>
+          <label htmlFor='leaves'>請假 (小時)</label>
           <Input 
+            id='leaves'
             type="number" 
             value={newEntry.leaves}
             onChange={(e) => onInputChange('leaves', e.target.value)}
@@ -60,8 +65,9 @@ export const TimeEntryForm = ({ newEntry, onInputChange, onAddEntry }: TimeEntry
           />
         </div>
         <div>
-          <label>其他</label>
+          <label htmlFor='other'>其他</label>
           <Input 
+            id='other'
             type="number" 
             value={newEntry.other}
             onChange={(e) => onInputChange('other', e.target.value)}
